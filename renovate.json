@@ -1,3 +1,4 @@
 {
+  "postUpdateOptions": ["gomodTidy"],
   "extends": ["config:base"]
 }

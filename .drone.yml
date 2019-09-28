@@ -6,6 +6,8 @@ steps:
     image: docker:git
     commands:
       - git fetch --tags
+    when:
+      event: [tags]
 
   - name: test
     image: golang
@@ -14,11 +16,13 @@ steps:
         path: /go
     commands:
       - make ci
+    depends_on: [clone]
     when:
       event: [pull_request]
 
   - name: validate commits
     image: commitsar/commitsar:0.7.0
+    depends_on: [clone]
     when:
       event: [pull_request]
 

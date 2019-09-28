@@ -15,6 +15,21 @@ steps:
     commands:
       - make ci
 
+  - name: validate commits
+    image: commitsar/commitsar:0.7.0
+    when:
+      event: [pull_request]
+
+  - name: relase notes
+    image: commitsar/release-notary:0.3.0
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+      GITHUB_REPOSITORY: $$DRONE_REPO
+    when:
+      event: tag
+    depends_on: [fetch]
+
   - name: release
     image: golang
     environment:
@@ -27,6 +42,7 @@ steps:
       - curl -sL https://git.io/goreleaser | bash
     when:
       event: tag
+    depends_on: [fetch]
 
 volumes:
   - name: deps

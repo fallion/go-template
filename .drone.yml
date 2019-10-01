@@ -7,7 +7,7 @@ steps:
     commands:
       - git fetch --tags
     when:
-      event: [tags]
+      event: [tag]
 
   - name: test
     image: golang

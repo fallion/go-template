@@ -26,12 +26,12 @@ steps:
     when:
       event: [pull_request]
 
-  - name: relase notes
+  - name: release notes
     image: commitsar/release-notary:0.3.0
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
-      GITHUB_REPOSITORY: ${DRONE_REPO}
+      GITHUB_REPOSITORY: ${CI_REPO}
     when:
       event: tag
     depends_on: [fetch]

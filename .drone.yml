@@ -31,7 +31,7 @@ steps:
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
-      GITHUB_REPOSITORY: $$DRONE_REPO
+      GITHUB_REPOSITORY: ${DRONE_REPO}
     when:
       event: tag
     depends_on: [fetch]

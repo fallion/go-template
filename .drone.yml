@@ -5,6 +5,7 @@ steps:
   - name: fetch
     image: docker:git
     commands:
+      - git fetch origin master
       - git fetch --tags
     when:
       event: [tag]
@@ -27,7 +28,7 @@ steps:
       event: [pull_request]
 
   - name: release notes
-    image: commitsar/release-notary:0.3.0
+    image: commitsar/release-notary:0.3.1
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
